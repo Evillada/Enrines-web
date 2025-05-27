@@ -1,0 +1,408 @@
+---
+import LogoImg from '../assets/logo.png';
+---
+<header class="header">
+  <div class="container">
+    <div class="header-content">
+      <!-- Logo alineado a la izquierda -->
+      <a href="/" class="logo">
+        <img src="/images/logo.png" alt="Enrines ICOR Logo" width="150" height="60" />
+      </a>
+
+      <!-- Menú + Logo Antioquia + WhatsApp alineados a la derecha --> 
+      <div class="right-nav">
+        <nav class="desktop-nav">
+          <ul>
+            <!-- <li><a href="#servicios">SERVICIOS</a></li> -->
+            <li><a href="#galeria">GALERÍA</a></li>
+            <li><a href="#contacto">CONTACTO</a></li>
+          </ul>
+        </nav>
+
+        <!-- Logo de Antioquia -->
+        <div class="antioquia-badge">
+          <div class="antioquia-content">
+            <div class="antioquia-flag">
+              <div class="flag-stripe white"></div>
+              <div class="flag-stripe green"></div>
+            </div>
+            <span class="antioquia-text">
+              ADN
+              <span class="antioquia-dna"> Antioqueño</span>
+            </span>
+          </div>
+        </div>
+
+        <!--<a href="https://wa.me/573152713602" class="whatsapp-btn">
+        <span>WhatsApp</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.787"/>
+        </svg>
+      </a> -->
+    </div>
+
+      <button class="mobile-menu-btn" aria-label="Menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu">
+    <nav>
+      <ul>
+        <!-- <li><a href="#servicios">SERVICIOS</a></li> -->
+        <li><a href="#galeria">GALERÍA</a></li>
+        <li><a href="#contacto">CONTACTO</a></li>
+      </ul>
+    </nav>
+    
+    <!-- Logo Antioquia en menú móvil -->
+    <div class="mobile-antioquia">
+      <div class="antioquia-badge-mobile">
+        <div class="antioquia-content-mobile">
+          <div class="antioquia-flag-mobile">
+            <div class="flag-stripe white"></div>
+            <div class="flag-stripe green"></div>
+          </div>
+          <span class="antioquia-text-mobile">
+            ADN <span class="antioquia-dna-mobile">Antioqueño</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+  const mobileMenu = document.querySelector('.mobile-menu');
+
+  mobileMenuBtn?.addEventListener('click', () => {
+    mobileMenuBtn.classList.toggle('active');
+    mobileMenu?.classList.toggle('active');
+  });
+
+  const mobileLinks = document.querySelectorAll('.mobile-menu a');
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenuBtn?.classList.remove('active');
+      mobileMenu?.classList.remove('active');
+    });
+  });
+</script>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--color-black);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+  }
+
+  .logo img {
+    height: 60px;
+    width: auto;
+  }
+
+  .right-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .desktop-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .desktop-nav a {
+    font-size: 1rem;
+    font-weight: 500;
+    position: relative;
+    color: var(--color-white);
+    transition: color 0.3s ease;
+    text-decoration: none;
+  }
+
+  .desktop-nav a:hover {
+    color: var(--color-red);
+  }
+
+  .desktop-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-red);
+    transition: width 0.3s ease;
+  }
+
+  .desktop-nav a:hover::after {
+    width: 100%;
+  }
+
+  /* Estilos para el logo de Antioquia - Desktop */
+  .antioquia-badge {
+    display: flex;
+    align-items: center;
+  }
+
+  .antioquia-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .antioquia-content:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .antioquia-flag {
+    width: 2.5rem;
+    height: 1.75rem;
+    border-radius: 0.3rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .flag-stripe {
+    width: 100%;
+    height: 50%;
+  }
+
+  .flag-stripe.white {
+    background-color: #ffffff;
+  }
+
+  .flag-stripe.green {
+    background-color: #22c55e;
+  }
+
+  .antioquia-text {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    line-height: 1.1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .antioquia-dna {
+    color: #4ade80;
+    font-weight: 700;
+    margin-left: 0.25rem;
+  }
+
+  /* Estilos para el logo de Antioquia - Móvil */
+  .mobile-antioquia {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .antioquia-badge-mobile {
+    display: inline-flex;
+  }
+
+  .antioquia-content-mobile {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    transition: all 0.3s ease;
+  }
+
+  .antioquia-flag-mobile {
+    width: 2.5rem;
+    height: 1.75rem;
+    border-radius: 0.3rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .antioquia-text-mobile {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    line-height: 1.1;
+  }
+
+  .antioquia-dna-mobile {
+    color: #4ade80;
+    font-weight: 700;
+  }
+
+  .whatsapp-btn {
+    display: flex;
+    align-items: center;
+    background-color: #00e454;
+    color: var(--color-white);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    transform-origin: center;
+    text-decoration: none;
+  }
+
+  .whatsapp-btn:hover {
+    background-color: #128C7E;
+    transform: scale(1.05);
+  }
+
+  .whatsapp-btn span {
+    margin-right: 0.5rem;
+  }
+
+  .whatsapp-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .mobile-menu-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  .mobile-menu-btn span {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-white);
+    transition: all 0.3s ease;
+  }
+
+  .mobile-menu-btn.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .mobile-menu-btn.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-btn.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    background-color: var(--color-black);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+    z-index: 999;
+  }
+
+  .mobile-menu.active {
+    max-height: 400px;
+  }
+
+  .mobile-menu nav {
+    padding: 1rem 0 0 0;
+  }
+
+  .mobile-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mobile-menu li {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .mobile-menu a {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--color-white);
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    .desktop-nav {
+      display: none;
+    }
+
+    .antioquia-badge {
+      display: none;
+    }
+
+    .mobile-menu-btn {
+      display: flex;
+    }
+
+    .right-nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .whatsapp-btn span {
+      display: none;
+    }
+
+    .whatsapp-btn {
+      padding: 0.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .right-nav {
+      gap: 0.5rem;
+    }
+
+    .antioquia-content-mobile {
+      padding: 0.4rem 0.6rem;
+    }
+
+    .antioquia-text-mobile {
+      font-size: 0.7rem;
+    }
+  }</style>

@@ -1,0 +1,140 @@
+<section id="servicios" class="services">
+    <div class="container">
+      <div class="section-badge">NUESTROS SERVICIOS</div>
+      <div class="section-title">
+        <h2>Soluciones <span>Profesionales</span></h2>
+      </div>
+      
+      <div class="services-grid">
+        <div class="service-card">
+          <!-- Reemplazar con la imagen del servicio (reparacion.jpg) -->
+          <img src="/images/reparacion.jpg" alt="Reparación de Rines" class="service-image" />
+          <div class="service-content">
+            <h3>Reparación de Rines</h3>
+            <p>Restauramos rines dañados por golpes, deformaciones o deterioro, devolviéndolos a su estado original con alta precisión.</p>
+            <a href="#contacto" class="service-link">Consultar</a>
+          </div>
+        </div>
+        
+        <div class="service-card">
+          <!-- Reemplazar con la imagen del servicio (venta.jpg) -->
+          <img src="/images/venta.jpg" alt="Venta de Rines y Llantas" class="service-image" />
+          <div class="service-content">
+            <h3>Venta de Rines y Llantas</h3>
+            <p>Ofrecemos una amplia gama de rines y llantas de las mejores marcas, con asesoría personalizada para encontrar la opción perfecta para tu vehículo.</p>
+            <a href="#contacto" class="service-link">Consultar</a>
+          </div>
+        </div>
+        
+        <div class="service-card">
+          <!-- Reemplazar con la imagen del servicio (alineacion.jpg) -->
+          <img src="/images/alineacion.jpg" alt="Alineación y Balanceo" class="service-image" />
+          <div class="service-content">
+            <h3>Alineación y Balanceo</h3>
+            <p>Realizamos alineación y balanceo profesional para optimizar el rendimiento de tus neumáticos y mejorar la estabilidad del vehículo.</p>
+            <a href="#contacto" class="service-link">Consultar</a>
+          </div>
+        </div>
+        
+        <div class="service-card">
+          <!-- Reemplazar con la imagen del servicio (pintura.jpg) -->
+          <img src="/images/pintura.jpg" alt="Pintura y Personalización" class="service-image" />
+          <div class="service-content">
+            <h3>Pintura y Personalización</h3>
+            <p>Personalizamos tus rines con acabados profesionales de pintura, pulido y recubrimientos especiales para un look único.</p>
+            <a href="#contacto" class="service-link">Consultar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <style>
+    .services {
+      background-color: var(--color-black);
+      padding: 5rem 0;
+    }
+    
+    .section-badge {
+      display: inline-block;
+      background-color: rgba(255, 58, 58, 0.1);
+      color: var(--color-red);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      text-align: center;
+      width: fit-content;
+      margin: 0 auto 1rem;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .service-card {
+      background-color: var(--color-gray);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .service-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .service-content {
+      padding: 1.5rem;
+    }
+    
+    .service-content h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--color-white);
+    }
+    
+    .service-content p {
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    
+    .service-link {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background-color: var(--color-red);
+      color: var(--color-white);
+      border-radius: 4px;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+    }
+    
+    .service-link:hover {
+      background-color: var(--color-dark-red);
+    }
+    
+    @media (max-width: 992px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
