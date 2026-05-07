@@ -1,5 +1,16 @@
-<section class="social-media">
+---
+import { readdirSync } from 'fs';
+import { resolve } from 'path';
+
+const imagesDir = resolve('./public/images');
+const totalImages = readdirSync(imagesDir).filter(f => /^gallery\d+\.png$/i.test(f)).length;
+---
+
+<section class="social-media" id="redes-sociales">
   <div class="container">
+    <div class="section-title social-section-title">
+      <h2>Síguenos en <span>Redes Sociales</span></h2>
+    </div>
     <div class="social-cards">
       <div class="social-card facebook">
         <div class="social-icon facebook-icon">
@@ -32,36 +43,29 @@
     </div>
   </div>
 
-  <script>
-    if (typeof window !== "undefined") {
-      const totalImages = 5;
-      const daysSinceEpoch = Math.floor(Date.now() / (1000 * 60 * 60 * 24));
-      
-      const fbIndex = (Math.floor(daysSinceEpoch / 30) % totalImages) + 1;
-      const igIndex = (Math.floor((daysSinceEpoch + 15) / 30) % totalImages) + 6;
-  
-      const facebookCard = document.querySelector('.social-card.facebook');
-      const instagramCard = document.querySelector('.social-card.instagram');
-  
-      const fbImageUrl = `/images/gallery${fbIndex}.png`;
-      const igImageUrl = `/images/gallery${igIndex}.png`;
-      if (facebookCard) {
-        (facebookCard as HTMLElement).style.background = `
-          linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-          url('${fbImageUrl}')
-        `;
-        (facebookCard as HTMLElement).style.backgroundSize = 'cover';
-        (facebookCard as HTMLElement).style.backgroundPosition = 'center';
-      }
-  
-      if (instagramCard) {
-        (instagramCard as HTMLElement).style.background = `
-          linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-          url('${igImageUrl}')
-        `;
-        (instagramCard as HTMLElement).style.backgroundSize = 'cover';
-        (instagramCard as HTMLElement).style.backgroundPosition = 'center';
-      }
+  <script define:vars={{ totalImages }}>
+    var sixHourPeriods = Math.floor(Date.now() / (1000 * 60 * 60 * 6));
+    var offset = Math.floor(totalImages / 2);
+
+    var fbIndex = (sixHourPeriods % totalImages) + 1;
+    var igIndex = ((sixHourPeriods + offset) % totalImages) + 1;
+
+    var facebookCard = document.querySelector('.social-card.facebook');
+    var instagramCard = document.querySelector('.social-card.instagram');
+
+    var fbImageUrl = '/images/gallery' + fbIndex + '.png';
+    var igImageUrl = '/images/gallery' + igIndex + '.png';
+
+    if (facebookCard) {
+      facebookCard.style.backgroundImage = 'linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("' + fbImageUrl + '")';
+      facebookCard.style.backgroundSize = 'cover';
+      facebookCard.style.backgroundPosition = 'center';
+    }
+
+    if (instagramCard) {
+      instagramCard.style.backgroundImage = 'linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("' + igImageUrl + '")';
+      instagramCard.style.backgroundSize = 'cover';
+      instagramCard.style.backgroundPosition = 'center';
     }
   </script>
 </section>
@@ -70,6 +74,14 @@
   .social-media {
     padding: 4rem 0;
     background-color: var(--color-black);
+  }
+
+  .social-section-title {
+    margin-bottom: 2.5rem;
+  }
+
+  .social-section-title h2 {
+    color: var(--color-white);
   }
 
   .social-cards {
@@ -82,12 +94,56 @@
     border-radius: 12px;
     padding: 2rem;
     text-align: center;
-    transition: transform 0.3s ease;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    border: 2px solid transparent;
+    animation: borderPulse 3s ease-in-out infinite;
+  }
+
+  .social-card.facebook {
+    animation-name: borderPulseFb;
+  }
+
+  .social-card.instagram {
+    animation-name: borderPulseIg;
+    animation-delay: 1.5s;
   }
 
   .social-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-8px);
+  }
+
+  .facebook:hover {
+    box-shadow: 0 0 30px rgba(24, 119, 242, 0.5);
+    border-color: #1877F2;
+    animation: none;
+  }
+
+  .instagram:hover {
+    box-shadow: 0 0 30px rgba(214, 36, 159, 0.5);
+    border-color: #d6249f;
+    animation: none;
+  }
+
+  @keyframes borderPulseFb {
+    0%, 100% {
+      border-color: transparent;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+      border-color: rgba(24, 119, 242, 0.7);
+      box-shadow: 0 0 22px rgba(24, 119, 242, 0.4), 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  @keyframes borderPulseIg {
+    0%, 100% {
+      border-color: transparent;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+      border-color: rgba(214, 36, 159, 0.7);
+      box-shadow: 0 0 22px rgba(214, 36, 159, 0.4), 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
   }
 
   .social-icon svg {
@@ -111,18 +167,38 @@
 
   .social-link {
     display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background-color: transparent;
-    border: 2px solid var(--color-white);
-    border-radius: 6px;
+    padding: 0.85rem 2rem;
+    border: none;
+    border-radius: 8px;
     color: var(--color-white);
-    font-weight: 500;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     transition: all 0.3s ease;
+    cursor: pointer;
   }
 
-  .social-link:hover {
-    background-color: var(--color-white);
-    color: var(--color-black);
+  .facebook .social-link {
+    background-color: #1877F2;
+    box-shadow: 0 0 18px rgba(24, 119, 242, 0.6);
+  }
+
+  .facebook .social-link:hover {
+    background-color: #0e5fd4;
+    box-shadow: 0 0 28px rgba(24, 119, 242, 0.85);
+    transform: scale(1.05);
+  }
+
+  .instagram .social-link {
+    background: linear-gradient(135deg, #fd5949 0%, #d6249f 50%, #285AEB 100%);
+    box-shadow: 0 0 18px rgba(214, 36, 159, 0.6);
+  }
+
+  .instagram .social-link:hover {
+    box-shadow: 0 0 28px rgba(214, 36, 159, 0.85);
+    transform: scale(1.05);
+    filter: brightness(1.1);
   }
 
   @media (max-width: 768px) {

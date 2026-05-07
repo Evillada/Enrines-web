@@ -1,3 +1,14 @@
+---
+import { readdirSync } from 'fs';
+import { resolve } from 'path';
+
+const imagesDir = resolve('./public/images');
+const galleryNums = readdirSync(imagesDir)
+  .filter(f => /^gallery\d+\.png$/i.test(f))
+  .map(f => parseInt(f.match(/(\d+)/)![0]))
+  .sort((a, b) => a - b);
+---
+
 <section id="galeria" class="gallery">
     <div class="container">
       <!-- <div class="section-badge">GALERÍA</div> -->
@@ -85,37 +96,49 @@
     </div>
   </div>
   
-  <script>
-    // Gallery modal functionality
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const galleryModal = document.querySelector('.gallery-modal');
-    const galleryModalImage = document.querySelector('.gallery-modal-image');
-    const galleryModalClose = document.querySelector('.gallery-modal-close');
-    
-    galleryItems.forEach(item => {
-      item.addEventListener('click', () => {
-        const img = item.querySelector('img');
-        if (!img) return;
-        const imgSrc = img.src;
-        if (galleryModalImage instanceof HTMLImageElement) {
-          galleryModalImage.src = imgSrc;
-        }
-        galleryModal?.classList.add('active');
+  <script define:vars={{ galleryNums }}>
+    // Rotación de imágenes cada 6 horas (ventana deslizante)
+    var DISPLAY_COUNT = 6;
+    var sixHourPeriods = Math.floor(Date.now() / (1000 * 60 * 60 * 6));
+    var startIdx = sixHourPeriods % galleryNums.length;
+
+    var imgs = document.querySelectorAll('.gallery-image');
+    imgs.forEach(function(img, i) {
+      var num = galleryNums[(startIdx + i) % galleryNums.length];
+      img.src = '/images/gallery' + num + '.png';
+    });
+
+    // Modal
+    var galleryItems = document.querySelectorAll('.gallery-item');
+    var galleryModal = document.querySelector('.gallery-modal');
+    var galleryModalImage = document.querySelector('.gallery-modal-image');
+    var galleryModalClose = document.querySelector('.gallery-modal-close');
+
+    galleryItems.forEach(function(item) {
+      item.addEventListener('click', function() {
+        var img = item.querySelector('img');
+        if (!img || !galleryModalImage || !galleryModal) return;
+        galleryModalImage.src = img.src;
+        galleryModal.classList.add('active');
         document.body.style.overflow = 'hidden';
       });
     });
-    
-    galleryModalClose?.addEventListener('click', () => {
-      galleryModal?.classList.remove('active');
-      document.body.style.overflow = '';
-    });
-    
-    galleryModal?.addEventListener('click', (e) => {
-      if (e.target === galleryModal) {
+
+    if (galleryModalClose) {
+      galleryModalClose.addEventListener('click', function() {
         galleryModal.classList.remove('active');
         document.body.style.overflow = '';
-      }
-    });
+      });
+    }
+
+    if (galleryModal) {
+      galleryModal.addEventListener('click', function(e) {
+        if (e.target === galleryModal) {
+          galleryModal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+    }
   </script>
   
   <style>
